@@ -106,6 +106,28 @@ async function deleteBeforeYear(year){
     })
     return book;
 }
+async function sortBookAfterYear(year){
+    const books = await db.collection('books').aggregate([
+        {$match:{year:{$gte:Number(year)}}},
+        {$sort:{year:-1}}
+    ]).toArray();
+
+    return books;
+}
+async function joinBookWithLogs(){
+    const book = await db.collection('logs').aggregate([
+        {
+            $lookup: {
+                from: 'books',
+                localField: 'bookObjectId',
+                foreignField: '_id',
+                as: 'book_details'
+            }
+        }
+    ]).toArray();
+
+    return book;
+}
 module.exports = {
     createBook,
     checkBookExits ,
@@ -119,4 +141,6 @@ module.exports = {
     findBooksYearInteger,
     findBooksByGenreExceptOnes,
     deleteBeforeYear,
+    sortBookAfterYear,
+    joinBookWithLogs,
 };

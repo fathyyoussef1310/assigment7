@@ -54,6 +54,14 @@ async function deleteBooksBeforeYear(yearOne){
     const book = await booksRepository.deleteBeforeYear(yearOne);
     return book;
 }
+async function sortByYear(yearOne){
+    const book = await booksRepository.sortBookAfterYear(yearOne);
+    return book;
+}
+async function joinBookWithLogs() {
+    const book = await booksRepository.joinBookWithLogs();
+    return book;
+}
 module.exports = {
     create,
     insertMultipleBooks,
@@ -66,4 +74,6 @@ module.exports = {
     findYearInteger,
     findBooksByGenreExceptOnes,
     deleteBooksBeforeYear,
+    sortByYear,
+    joinBookWithLogs
 }

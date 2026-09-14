@@ -138,6 +138,30 @@ const bookService = require("./books.services");
          next(err);
      }
  }
+ async function sortByYear(req, res,next){
+     try {
+         const book = await bookService.sortByYear(req.query.year);
+         res.status(200).json({
+             message: "Success",
+             success: true,
+             data:book
+         })
+     }catch(err){
+         next(err);
+     }
+ }
+ async function joinBooksByLogs(req, res,next){
+     try {
+         const book = await bookService.joinBookWithLogs();
+         res.status(200).json({
+             message: "Success",
+             success: true,
+             data:book
+         })
+     }catch(err){
+         next(err);
+     }
+ }
  module.exports = {
      createBook,
      insertBook,
@@ -149,5 +173,7 @@ const bookService = require("./books.services");
      descBooks,
      findYearInteger,
      findBooksByGenreExceptOnes,
-     deleteBooksBeforeYear
+     deleteBooksBeforeYear,
+     sortByYear,
+     joinBooksByLogs,
  };
