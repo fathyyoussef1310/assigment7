@@ -42,6 +42,18 @@ async function descBooksByYear(limit = 3 , page =1) {
     const books = await booksRepository.descYearSort(+skip, +limit);
     return books;
 }
+async function findYearInteger() {
+    const book = await booksRepository.findBooksYearInteger();
+    return book;
+}
+async function findBooksByGenreExceptOnes(genres) {
+    const books= await booksRepository.findBooksByGenreExceptOnes(genres);
+    return books;
+}
+async function deleteBooksBeforeYear(yearOne){
+    const book = await booksRepository.deleteBeforeYear(yearOne);
+    return book;
+}
 module.exports = {
     create,
     insertMultipleBooks,
@@ -50,5 +62,8 @@ module.exports = {
     getBooksAt,
     getBooksByGenre,
     getBookByTitle,
-    descBooksByYear
+    descBooksByYear,
+    findYearInteger,
+    findBooksByGenreExceptOnes,
+    deleteBooksBeforeYear,
 }

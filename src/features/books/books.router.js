@@ -11,4 +11,7 @@ bookRouter.get('/year' , bookController.getYearAt)
 bookRouter.get('/genre' , bookController.getBookGenre)
 bookRouter.get('/title',bookController.getBookByTitle)
 bookRouter.get('/skip-limit',bookController.descBooks)
+bookRouter.get('/year-integer',bookController.findYearInteger),
+bookRouter.get('/exclude-genres',bookController.findBooksByGenreExceptOnes),
+bookRouter.get('/before-year',bookController.deleteBooksBeforeYear)
 module.exports = bookRouter;

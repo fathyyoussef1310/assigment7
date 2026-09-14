@@ -101,6 +101,43 @@ const bookService = require("./books.services");
          next(err);
      }
  }
+ async function findYearInteger(req, res,next){
+     try{
+         const books = await bookService.findYearInteger();
+         res.status(200).json({
+             message: "Success",
+             success: true,
+             data:books
+         })
+     }catch(err){
+         next(err);
+     }
+ }
+ async function findBooksByGenreExceptOnes(req, res,next){
+     try {
+         const books = await bookService.findBooksByGenreExceptOnes(req.query.genres);
+         res.status(200).json({
+             message: "Success",
+             success: true,
+             data:books
+         })
+     }
+     catch(err){
+         next(err);
+     }
+ }
+ async function deleteBooksBeforeYear(req, res,next){
+     try {
+         const book = await bookService.deleteBooksBeforeYear(req.query.year);
+         res.status(200).json({
+             message: "Success",
+             success: true,
+             data:book
+         })
+     }catch(err){
+         next(err);
+     }
+ }
  module.exports = {
      createBook,
      insertBook,
@@ -109,5 +146,8 @@ const bookService = require("./books.services");
      getYearAt,
      getBookGenre,
      getBookByTitle,
-     descBooks
+     descBooks,
+     findYearInteger,
+     findBooksByGenreExceptOnes,
+     deleteBooksBeforeYear
  };

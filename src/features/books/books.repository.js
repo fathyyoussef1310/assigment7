@@ -86,6 +86,26 @@ async function descYearSort(skip = 0, limit = 3) {
 
     return books;
 }
+async function findBooksYearInteger(){
+    const book = await db.collection('books').find({
+        year:{$type:"int"}
+    }).toArray()
+    return book;
+}
+async function findBooksByGenreExceptOnes(genres){
+    const books = await db.collection('books').find({
+        genres:{
+            $nin:[genres]
+        }
+    }).toArray();
+    return books;
+}
+async function deleteBeforeYear(year){
+    const book = await db.collection('books').deleteMany({
+        year:{$lt:Number(year)},
+    })
+    return book;
+}
 module.exports = {
     createBook,
     checkBookExits ,
@@ -95,5 +115,8 @@ module.exports = {
     getBooksAt,
     getBooksByGenre,
     getBookByTitle,
-    descYearSort
+    descYearSort,
+    findBooksYearInteger,
+    findBooksByGenreExceptOnes,
+    deleteBeforeYear,
 };
