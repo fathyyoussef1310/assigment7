@@ -1,0 +1,261 @@
+{
+////// Question1;
+///// command:db.createCollection('books') ,
+Ans: { ok: 1 }
+}
+
+{
+/// Question2;
+///command:db.authors.insertOne({$name:"Fathy" , $nationality:"Egypt"}),
+//// ANS:{
+           acknowledged: true,
+           insertedId: ObjectId('6aa972c0f8121db49eb258c6')
+         }
+}
+
+{
+//Q3
+///Command: db.createCollection('logs',{capped:true , size:1000}),
+/// ANS : { ok: 1 }
+}
+
+{
+///Q4
+////Command: db.books.createIndex({title:1})
+////ANS :title_1
+}
+
+{
+Q5
+/////Command : db.books.insertOne({
+               title:"Future" , author:"George mmaa" ,year : 2020 , genres:["Fantasy" , "Adventure"]
+               }),
+               ANS: {
+                      acknowledged: true,
+                      insertedId: ObjectId('6aa97937f8121db49eb258c7')
+                    }
+}
+
+{
+ ///Q6
+ //// Command: db.books.insertMany([
+               {
+               "title": "Future",
+               "author": "deorge Orwell",
+               "year": 2020,
+               "genres": ["Science Fiction"]
+               },
+               {
+               "title": "To Kill a Mockingbird",
+               "author": "Harper Lee",
+               "year": 1960,
+               "genres": ["Classic", "Fiction"]
+               },
+               {
+               "title": "Brave New World",
+               "author": "Aldows Huxley",
+               "year": 2006,
+               "genres": ["Dystopian", "Science Fiction"]
+               },])
+
+               ANS: {
+                      acknowledged: true,
+                      insertedIds: {
+                        '0': ObjectId('6aa97cf3f8121db49eb258c8'),
+                        '1': ObjectId('6aa97cf3f8121db49eb258c9'),
+                        '2': ObjectId('6aa97cf3f8121db49eb258ca')
+                      }
+                    }
+}
+
+{
+/// Q7 : Command:db.logs.insertOne({
+                   book_id: "64b5c2dBa123456ef8914",
+                   action: "borrowed"
+                 }),
+                 ANS: {
+                        acknowledged: true,
+                        insertedId: ObjectId('6aa98050f8121db49eb258cc')
+                      }
+}
+
+{
+///Q8
+  //// db.books.updateOne(
+         {title:"Future"},
+                          {
+                            $set:{
+                              year:2022
+                            }
+                          }
+       )
+
+       ANS: {
+              acknowledged: true,
+              insertedId: null,
+              matchedCount: 1,
+              modifiedCount: 1,
+              upsertedCount: 0
+            }
+}
+
+
+{
+///Q9 : Command :db.books.findOne(
+                   {title:"Brave New World"},
+                 )
+                 ANS: {
+                        _id: ObjectId('6aa97cf3f8121db49eb258ca'),
+                        title: 'Brave New World',
+                        author: 'Aldows Huxley',
+                        year: 2006,
+                        genres: [
+                          'Dystopian',
+                          'Science Fiction'
+                        ]
+                      }
+}
+
+{
+ Q10: Command : db.books.find({
+                  year:{
+                    $gte: 1990,
+                    $lte :  2010
+                 }
+                }) ,
+                ANS: {
+                       _id: ObjectId('6aa97cf3f8121db49eb258ca'),
+                       title: 'Brave New World',
+                       author: 'Aldows Huxley',
+                       year: 2006,
+                       genres: [
+                         'Dystopian',
+                         'Science Fiction'
+                       ]
+                     }
+}
+
+
+{
+Q11: Command: db.books.find({
+                  genres: {
+                      $eq: "Science Fiction"
+                  }
+              }),
+              ANS: {
+                     _id: ObjectId('6aa97cf3f8121db49eb258c8'),
+                     title: 'Future',
+                     author: 'deorge Orwell',
+                     year: 2020,
+                     genres: [
+                       'Science Fiction'
+                     ]
+                   },{
+                     _id: ObjectId('6aa97cf3f8121db49eb258ca'),
+                     title: 'Brave New World',
+                     author: 'Aldows Huxley',
+                     year: 2006,
+                     genres: [
+                       'Dystopian',
+                       'Science Fiction'
+                     ]
+                   }
+}
+
+{
+Q12: Command: db.books.aggregate([{
+                $sort:{
+                  year:-1
+                }},{
+                  $skip:0
+                },
+                                  {
+                                    $limit:3
+                                  }
+              ])
+
+ANS: {
+       _id: ObjectId('6aa97937f8121db49eb258c7'),
+       title: 'Future',
+       author: 'George mmaa',
+       year: 2022,
+       genres: [
+         'Fantasy',
+         'Adventure'
+       ],
+       Year: 2022
+     } ,
+     {
+       _id: ObjectId('6aa97cf3f8121db49eb258c8'),
+       title: 'Future',
+       author: 'deorge Orwell',
+       year: 2020,
+       genres: [
+         'Science Fiction'
+       ]
+     },
+     {
+
+  _id: ObjectId('6aa97cf3f8121db49eb258c8'),
+  title: 'Future',
+  author: 'deorge Orwell',
+  year: 2020,
+  genres: [
+    'Science Fiction'
+  ]
+}
+     }
+}
+
+{
+Q13: Command: db.books.find({
+                year:{
+                  $type:"int",
+                }
+              }) ,
+              Ans :Is too Long Answer so try it in Your DataBase
+}
+{
+Q14: COmmand: db.books.find({
+                genre:{
+                  $nin:["Science Fiction"]
+                }
+              }) ,
+              ANS: Same as The Last Question  //// انا يوسف فتحي يامعاذ او ياشورا والله وعارف انكم لو شوفنه السؤالين هتقولو شات GPT
+              انا دورت عليهم وحته nin ديه شات فعلا بس هي ديه بس
+}
+{
+Q15 : Command : db.books.deleteMany({
+                  year:{lt:2000}
+                }),
+
+                ANS: {
+                       acknowledged: true,
+                       deletedCount: 2
+                     }
+}
+{
+ Q16: Command:db.books.aggregate([
+                {
+                  $match:{
+                year:{
+                  $gte:2011
+                }
+                },
+                },
+              {
+                $sort:{
+                  year:-1
+                }
+              }
+              ]),
+              ANS: {
+                     _id: ObjectId('6aa99f78f8121db49eb258d7'),
+                     title: 'Future',
+                     author: 'deorge Orwell',
+                     year: 2020,
+                     genres: [
+                       'Science Fiction'
+                     ]
+                   }
+}
